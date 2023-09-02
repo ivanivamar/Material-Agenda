@@ -1,0 +1,37 @@
+nav
+    background-color: $primary-color
+    position: fixed
+    bottom: 0
+    left: 0
+    width: 100%
+    z-index: 10
+
+    a
+        display: flex
+        flex-direction: column
+        color: #C8D2FE
+        height: 100%
+        justify-content: center
+        align-items: center
+        text-decoration: none
+        font-size: 14px
+        padding: 6px 12px
+        font-family: $font-family
+        font-weight: 500
+
+        i
+            font-size: 20px
+            margin-bottom: 2px
+
+        span
+            display: none
+
+        &.active
+            background-color: #6883fd
+            color: #fff
+
+            span
+                display: block
+
+        &:hover
+            background-color: #6883fd

@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "material-agenda": {
+      "hosting": {
+        "material-agenda": [
+          "material-agenda"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "material-agenda"
+  }
+}
