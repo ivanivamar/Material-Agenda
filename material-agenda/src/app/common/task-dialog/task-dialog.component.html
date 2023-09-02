@@ -1,24 +1,85 @@
 <div class="dialog-full">
-    <div class="dialog-header">
-        <span class="dialog-title">
-            {{ task.id ? 'Edit Project' : 'Add Project' }}
-        </span>
+    <div class="dialog-header border-bottom-1 border-300">
+        <div class="dialog-title flex align-items-center gap-2">
+            <button class="icon-btn text-btn" (click)="close()">
+                <span class="material-symbols-rounded text-2xl">arrow_back</span>
+            </button>
+        </div>
 
-        <button class="icon-btn text-btn small-btn" (click)="close()">
-            <span class="material-symbols-rounded">close</span>
-        </button>
+        <div class="flex gap-3 align-items-center">
+            <p-inputSwitch class="mt-1" [(ngModel)]="task.completed" *ngIf="task.id"></p-inputSwitch>
+            <button class="icon-btn text-btn small-btn" *ngIf="task.id" (click)="deleteTask()">
+                <span class="material-symbols-rounded text-danger text-xl">delete</span>
+            </button>
+        </div>
     </div>
     <div class="dialog-content">
-        <mat-input [inputType]="'text'" [(value)]="task.title" [icon]="'Title'" [label]="'Title'"></mat-input>
+        <input type="text" class="border-0 text-2xl" [(ngModel)]="task.title" placeholder="Title"/>
+        <div class="flex gap-1 align-items-baseline mt-4">
+            <i class="material-symbols-rounded text-secondary text-xl" style="position: relative; top: 4px;">notes</i>
+            <textarea style="min-height: 120px" [(ngModel)]="task.description" placeholder="Description"></textarea>
+        </div>
+        <div class="flex gap-1 align-items-baseline mt-4">
+            <i class="material-symbols-rounded text-secondary text-xl"
+               style="position: relative; top: 4px;">schedule</i>
+            <button class="btn text-btn small-btn px-1" (click)="showChooseDate = true">
+                <span class="text-secondary" *ngIf="task.date === null">Add due date</span>
+                <span *ngIf="task.date !== null">{{task.date | date:'medium'}}</span>
+                <i class="material-symbols-rounded text-secondary text-lg ml-2" *ngIf="task.date !== null"
+                   (click)="clearDueDate($event)">close</i>
+            </button>
+        </div>
+        <div class="flex gap-1 align-items-baseline mt-4" [class.flex-column]="task.subtasks.length > 0">
+            <i class="material-symbols-rounded text-secondary text-xl"
+               style="position: relative; top: 4px;">subdirectory_arrow_right</i>
+            <div class="flex gap-2 pl-4 w-full mb-1" style="position: relative; top: -18px;"
+                 *ngFor="let subtask of task.subtasks; let index = index">
+                <p-checkbox [(ngModel)]="subtask.completed" [binary]="true"></p-checkbox>
+                <input type="text" class="border-0 p-0 text-base" [class.line-through]="subtask.completed"
+                       [(ngModel)]="subtask.title" placeholder="Write a title"/>
+                <i class="material-symbols-rounded text-lg" (click)="deleteSubtask(index)">close</i>
+            </div>
+            <button class="btn text-btn small-btn px-1"
+                    [class.button-to-right]="task.subtasks.length > 0"
+                    (click)="addSubtask()">
+                Add subtasks
+            </button>
+        </div>
 
-        <mat-textarea class="block mt-3" [(value)]="task.description" [icon]="'Description'" [label]="'Description'"></mat-textarea>
     </div>
     <div class="dialog-footer">
-        <button type="button" ripple class="btn text-btn" (click)="close()">
+        <button type="button" class="btn outlined-btn" (click)="close()">
             Close
         </button>
-        <button type="button" ripple class="btn filled-btn shadow-1" (click)="save()">
+        <button type="button" class="btn filled-btn shadow-1" [disabled]="checkDisabled()" (click)="save()">
             Save
         </button>
+    </div>
+</div>
+
+
+<div class="dialog-container" *ngIf="showChooseDate" style="z-index: 9999999999999999999999">
+    <div class="overlay" (click)="showChooseDate = false"></div>
+    <div class="dialog dialog-sm">
+        <div class="dialog-header">
+            <span class="dialog-title">
+                Due Date
+            </span>
+
+            <i class="material-symbols-rounded" (click)="showChooseDate = false">
+                close
+            </i>
+        </div>
+        <p-calendar [(ngModel)]="newDate" [inline]="true"></p-calendar>
+
+        <div class="dialog-footer">
+            <button class="btn outlined-btn" (click)="newDate = task.date; showChooseDate = false">
+                Cancel
+            </button>
+
+            <button class="btn filled-btn" (click)="task.date = newDate ;showChooseDate = false">
+                Done
+            </button>
+        </div>
     </div>
 </div>

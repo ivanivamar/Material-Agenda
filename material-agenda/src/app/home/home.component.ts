@@ -37,6 +37,11 @@ export class HomeComponent implements OnInit {
         from(this.agendaService.getTasks()).subscribe((tasks: Task[]) => {
             // select only tasks from current user
             this.tasks = tasks.filter((task: Task) => task.userId === this.user.uid);
+            this.tasks.forEach((task: Task) => {
+                // @ts-ignore
+                const milliseconds = task.date.seconds * 1000 + Math.floor(task.date.nanoseconds / 1000000);
+                task.date = new Date(milliseconds);
+            });
             this.loading = false;
         });
     }
@@ -49,19 +54,25 @@ export class HomeComponent implements OnInit {
             date: null,
             creationDate: new Date(),
             userId: this.user.uid,
-            status: null,
-            important: false,
+            completed: false,
             updateDate: null,
-            tasks: [],
+            subtasks: [],
         } as Task;
+        this.showDialog = false;
     }
 
     refreshTasks(): void {
         this.loading = true;
         from(this.agendaService.getTasks()).subscribe((tasks: Task[]) => {
             this.tasks = tasks.filter((task: Task) => task.userId === this.user.uid);
+            this.tasks.forEach((task: Task) => {
+                // @ts-ignore
+                const milliseconds = task.date.seconds * 1000 + Math.floor(task.date.nanoseconds / 1000000);
+                task.date = new Date(milliseconds);
+            });
             this.loading = false;
         });
+        this.showDialog = false;
     }
 
     addTask(): void {

@@ -2,18 +2,17 @@ export interface Task {
     id?: string;
     title: string;
     description: string;
-    status: string;
+    completed: boolean;
     date: Date;
     creationDate: Date;
     updateDate: Date;
     userId: string;
-    tasks: Subtask[];
-    important: boolean;
+    subtasks: Subtask[];
 }
 
 export interface Subtask {
-    status: string;
-    description: string;
+    title: string;
+    completed: boolean;
 }
 
 export interface IDropdownOption {

@@ -1,12 +1,17 @@
-<div class="flex flex-column">
-    <div class="flex p-5 align-items-center justify-content-center">
-
+<div class="flex flex-column border-top-1 border-500" *ngIf="!loading">
+    <div class="flex p-3 m-2 align-items-center justify-content-center bg-warning rounded border-warning"
+         *ngIf="tasks.length === 0">
+        <span class="text-center text-xl">No tasks found</span>
     </div>
-    <app-task-card (click)="selectedTask = task; showDialog = true;" *ngFor="let task of tasks"></app-task-card>
+    <div class="flex flex-column gap-3" *ngFor="let task of tasks">
+        <app-task-card [task]="task" (click)="selectedTask = task; showDialog = true;" *ngIf="!task.completed"></app-task-card>
+    </div>
 </div>
+
 
 <button class="fab" (click)="addTask()">
     <i class="material-symbols-rounded">add_task</i>
 </button>
 
-<app-task-dialog *ngIf="showDialog" [task]="selectedTask" (saveOutput)="refreshTasks()" (closeOutput)="clearTask()"></app-task-dialog>
+<app-task-dialog *ngIf="showDialog" [task]="selectedTask" (saveOutput)="refreshTasks()"
+                 (closeOutput)="clearTask()"></app-task-dialog>
