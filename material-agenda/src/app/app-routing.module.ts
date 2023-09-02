@@ -3,13 +3,20 @@ import {AgendaComponent} from "./agenda/agenda.component";
 import {canActivate, redirectUnauthorizedTo} from "@angular/fire/auth-guard";
 import {NgModule} from "@angular/core";
 import {LoginComponent} from "./login/login.component";
+import {HomeComponent} from "./home/home.component";
 
 const routes: Routes = [
     {
         path: '',
+        component: HomeComponent,
+        pathMatch: 'full',
+        ...canActivate(() => redirectUnauthorizedTo(['/login'])),
+    },
+    {
+        path: 'agenda',
         component: AgendaComponent,
         pathMatch: 'full',
-        canActivate: [canActivate(() => redirectUnauthorizedTo(['/login']))],
+        ...canActivate(() => redirectUnauthorizedTo(['/login'])),
     },
     {
         path: 'login',
@@ -22,4 +29,5 @@ const routes: Routes = [
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {
+}

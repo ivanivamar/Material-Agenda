@@ -8,6 +8,7 @@ export interface Task {
     updateDate: Date;
     userId: string;
     tasks: Subtask[];
+    important: boolean;
 }
 
 export interface Subtask {

@@ -1,15 +1,15 @@
-<nav *ngIf="!user">
-    <a ripple routerLink="" routerLinkActive="active">
+<nav *ngIf="user">
+    <a routerLink="" routerLinkActive="active">
         <i class="material-symbols-rounded">home</i>
         <span>Home</span>
     </a>
 
-    <a ripple routerLink="" routerLinkActive="active">
+    <a routerLink="agenda" routerLinkActive="active">
         <i class="material-symbols-rounded">view_agenda</i>
         <span>Agenda</span>
     </a>
 
-    <a ripple (click)="logout()">
+    <a (click)="logout()">
         <i class="material-symbols-rounded">logout</i>
         <span>Logout</span>
     </a>

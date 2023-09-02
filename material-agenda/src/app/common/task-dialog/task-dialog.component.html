@@ -1,0 +1,24 @@
+<div class="dialog-full">
+    <div class="dialog-header">
+        <span class="dialog-title">
+            {{ task.id ? 'Edit Project' : 'Add Project' }}
+        </span>
+
+        <button class="icon-btn text-btn small-btn" (click)="close()">
+            <span class="material-symbols-rounded">close</span>
+        </button>
+    </div>
+    <div class="dialog-content">
+        <mat-input [inputType]="'text'" [(value)]="task.title" [icon]="'Title'" [label]="'Title'"></mat-input>
+
+        <mat-textarea class="block mt-3" [(value)]="task.description" [icon]="'Description'" [label]="'Description'"></mat-textarea>
+    </div>
+    <div class="dialog-footer">
+        <button type="button" ripple class="btn text-btn" (click)="close()">
+            Close
+        </button>
+        <button type="button" ripple class="btn filled-btn shadow-1" (click)="save()">
+            Save
+        </button>
+    </div>
+</div>

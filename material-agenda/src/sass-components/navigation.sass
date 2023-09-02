@@ -5,17 +5,22 @@ nav
     left: 0
     width: 100%
     z-index: 10
+    display: flex
+    justify-content: space-evenly
+    align-items: center
+    box-shadow: 0 10px 10px $primary-color
 
     a
         display: flex
         flex-direction: column
         color: #C8D2FE
         height: 100%
+        width: 100%
         justify-content: center
         align-items: center
         text-decoration: none
         font-size: 14px
-        padding: 6px 12px
+        padding: 10px 12px
         font-family: $font-family
         font-weight: 500
 
@@ -27,11 +32,11 @@ nav
             display: none
 
         &.active
-            background-color: #6883fd
             color: #fff
 
             span
                 display: block
-
-        &:hover
-            background-color: #6883fd
+        &:hover,
+        &:focus,
+        &:active
+            background-color: transparent

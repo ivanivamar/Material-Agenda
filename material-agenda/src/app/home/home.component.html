@@ -1,0 +1,12 @@
+<div class="flex flex-column">
+    <div class="flex p-5 align-items-center justify-content-center">
+
+    </div>
+    <app-task-card (click)="selectedTask = task; showDialog = true;" *ngFor="let task of tasks"></app-task-card>
+</div>
+
+<button class="fab" (click)="addTask()">
+    <i class="material-symbols-rounded">add_task</i>
+</button>
+
+<app-task-dialog *ngIf="showDialog" [task]="selectedTask" (saveOutput)="refreshTasks()" (closeOutput)="clearTask()"></app-task-dialog>

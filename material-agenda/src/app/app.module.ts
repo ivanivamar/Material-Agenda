@@ -17,6 +17,9 @@ import {MatTextareaComponent} from "./common/mat-textarea/mat-textarea.component
 import {MatDropdownComponent} from "./common/mat-dropdown/mat-dropdown.component";
 import {RippleDirective} from "./ripple.directive";
 import { LoginComponent } from './login/login.component';
+import { HomeComponent } from './home/home.component';
+import { TaskCardComponent } from './common/task-card/task-card.component';
+import { TaskDialogComponent } from './common/task-dialog/task-dialog.component';
 
 @NgModule({
     declarations: [
@@ -28,6 +31,9 @@ import { LoginComponent } from './login/login.component';
         MatDropdownComponent,
         RippleDirective,
         LoginComponent,
+        HomeComponent,
+        TaskCardComponent,
+        TaskDialogComponent,
     ],
     imports: [
         BrowserModule,
