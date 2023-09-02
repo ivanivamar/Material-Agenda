@@ -1,1 +1,47 @@
-<p>agenda works!</p>
+<div class="tabs-container">
+    <div class="tab" (click)="selectedDate = day; getTasksForCurrent()" [class.active]="day.toString() === selectedDate.toString()"
+         *ngFor="let day of daysTabs">
+        {{ getMonthName(day) }} {{ day | date: 'd' }}
+    </div>
+    <div class="tab">
+        <i class="material-symbols-rounded" (click)="showChooseDate = true">
+            calendar_today
+        </i>
+    </div>
+</div>
+
+<div class="flex flex-column gap-3">
+    <app-task-card [task]="task" (click)="selectedTask = task; showDialog = true;"
+                   *ngFor="let task of currentTasks"></app-task-card>
+</div>
+
+
+<div class="dialog-container" *ngIf="showChooseDate">
+    <div class="overlay" (click)="showChooseDate = false"></div>
+    <div class="dialog dialog-sm">
+        <div class="dialog-header">
+            <span class="dialog-title">
+                Select Date
+            </span>
+
+            <i class="material-symbols-rounded" (click)="showChooseDate = false">
+                close
+            </i>
+        </div>
+        <p-calendar [(ngModel)]="selectedDate" [inline]="true" [showWeek]="true"
+                    (onSelect)="onDateSelect($event);showChooseDate = false"></p-calendar>
+
+        <div class="dialog-footer">
+            <button class="btn filled-btn" (click)="showChooseDate = false">
+                OK
+            </button>
+        </div>
+    </div>
+</div>
+
+<button class="fab" (click)="addTask()">
+    <i class="material-symbols-rounded">add_task</i>
+</button>
+
+<app-task-dialog *ngIf="showDialog" [task]="selectedTask"
+                 (closeOutput)="clearTask()"></app-task-dialog>

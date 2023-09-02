@@ -35,7 +35,19 @@ $text-color: #1C1C1C
 $text-secondary: #969696
 $border-radius: 8px
 
-$font-family: 'Roboto', sans-serif
+@font-face
+    font-family: 'Product Sans Regular'
+    src: url('./fonts/Product_Sans_Regular.ttf') format('truetype')
+    font-weight: 400
+    font-style: normal
+@font-face
+    font-family: 'Product Sans Bold'
+    src: url('./fonts/Product_Sans_Bold.ttf') format('truetype')
+    font-weight: 700
+    font-style: normal
+
+$font-family: 'Product Sans Regular', sans-serif
+$font-family-bold: 'Product Sans Bold', sans-serif
 
 body
     font-family: $font-family
@@ -68,6 +80,12 @@ body
     color: $text-secondary !important
 .text-primary
     color: $primary-color !important
+.text-warning
+    color: $warning-color !important
+.text-danger
+    color: $danger-color !important
+.text-success
+    color: $success-color !important
 
 .bg-color
     background-color: $bg-color !important

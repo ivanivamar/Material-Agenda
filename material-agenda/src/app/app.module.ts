@@ -20,6 +20,11 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { TaskCardComponent } from './common/task-card/task-card.component';
 import { TaskDialogComponent } from './common/task-dialog/task-dialog.component';
+import { TopbarComponent } from './common/topbar/topbar.component';
+import {CalendarModule} from "primeng/calendar";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {CheckboxModule} from "primeng/checkbox";
 
 @NgModule({
     declarations: [
@@ -34,6 +39,7 @@ import { TaskDialogComponent } from './common/task-dialog/task-dialog.component'
         HomeComponent,
         TaskCardComponent,
         TaskDialogComponent,
+        TopbarComponent,
     ],
     imports: [
         BrowserModule,
@@ -44,6 +50,10 @@ import { TaskDialogComponent } from './common/task-dialog/task-dialog.component'
         provideAuth(() => getAuth()),
         provideFirestore(() => getFirestore()),
         provideStorage(() => getStorage()),
+        CalendarModule,
+        BrowserAnimationsModule,
+        InputSwitchModule,
+        CheckboxModule,
     ],
     providers: [],
     bootstrap: [AppComponent]

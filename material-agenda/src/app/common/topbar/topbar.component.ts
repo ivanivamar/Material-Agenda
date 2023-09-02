@@ -3,17 +3,20 @@ import {AuthService} from "../../services/auth.service";
 import {Router} from "@angular/router";
 
 @Component({
-    selector: 'app-navbar',
-    templateUrl: './navbar.component.html',
-    styleUrls: ['./navbar.component.sass'],
+    selector: 'app-topbar',
+    templateUrl: './topbar.component.html',
+    styleUrls: ['./topbar.component.sass'],
     providers: [AuthService],
 })
-export class NavbarComponent implements OnInit {
+export class TopbarComponent implements OnInit {
     user: any = null;
+    pageTitle: string = 'Home';
+
     constructor(
         private auth: AuthService,
         private router: Router,
-    ) {}
+    ) {
+    }
 
     async ngOnInit(): Promise<void> {
         // check if user is logged in
@@ -21,12 +24,10 @@ export class NavbarComponent implements OnInit {
             this.user = user;
             console.log('%c NavbarComponent -> ngOnInit -> user', 'color: #bada55', user);
         });
-    }
 
-    logout(): void {
-        this.auth.logout().then(() => {
-            this.user = null;
-            this.router.navigate(['/login']);
+        // set page title
+        this.router.events.subscribe((val) => {
+            this.pageTitle = this.router.url.split('/')[1].toUpperCase();
         });
     }
 }
